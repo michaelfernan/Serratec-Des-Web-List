@@ -1,11 +1,11 @@
-
+import { Home } from "./pages/Home";
+import { GlobalStyle } from "./styles/global";
 
 export function App() {
   return (
-    <div>
-      <h1> Ola Mundo</h1>     
-    </div>
+    <>
+      <GlobalStyle />
+      <Home/>
+    </>
   );
 }
-  
-export default App;
