@@ -81,3 +81,20 @@ export const TaskList = styled.div`
     margin-top: 2rem;
 
 `;
+
+export const TagButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+
+  &:hover {
+    color: #333;
+  }
+
+  ${({ selected }) => selected && `
+    font-weight: bold;
+    color: #333;
+  `}
+`;
