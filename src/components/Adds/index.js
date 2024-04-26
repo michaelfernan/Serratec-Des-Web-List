@@ -87,7 +87,19 @@ export function Adds({ info }) {
                 </datalist>
                 <div>
                     {tagOptions.map(tag => (
-                        <button key={tag.value} onClick={() => setSelectedTag(tag.value)} style={{margin: '5px'}}>
+                        <button
+                            key={tag.value}
+                            style={{
+                                margin: '5px',
+                                backgroundColor: selectedTag === tag.value ? 'lightgray' : 'transparent',
+                                border: 'none',
+                                fontSize: '24px'
+                            }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSelectedTag(tag.value);
+                            }}
+                        >
                             {tag.icon}
                         </button>
                     ))}
@@ -98,19 +110,30 @@ export function Adds({ info }) {
             </Form>
 
             {Object.entries(tasksByCategory).map(([category, tasks]) => (
-                <div key={category}>
-                    <h3>{category}</h3>
-                    <TaskList>
-                        {tasks.map(task => (
-                            <Task
-                                key={task.id}
-                                task={task}
-                                onDeleteTask={deleteTask}
-                            />
-                        ))}
-                    </TaskList>
-                </div>
+    <div key={category}>
+        <h3>{category}</h3>
+        <div style={{ display: 'flex', padding: '10px', background: '#f0f0f0', marginTop: '10px' }}>
+            <strong style={{ flex: '0 0 40px', marginRight: '10px' }}>Concluído</strong>
+            <strong style={{ flex: '2 0 200px', marginRight: '10px' }}>Descrição</strong>
+            <strong style={{ flex: '1 0 100px', marginRight: '10px' }}>Categoria</strong>
+            <strong style={{ flex: '0 0 40px', marginRight: '20px' }}>Prioridade</strong>
+            <strong style={{ flex: '0 0 40px', marginRight: '20px' }}>Editar</strong>
+            <strong style={{ flex: '0 0 40px' }}>Deletar</strong>
+        </div>
+        <TaskList>
+            {tasks.map(task => (
+                <Task
+                    key={task.id}
+                    task={task}
+                    onDeleteTask={deleteTask}
+                    urgencyIcon={tagOptions.find(tag => tag.value === task.urgency)?.icon}
+                />
             ))}
+        </TaskList>
+    </div>
+))}
+
+
         </Container>
     );
 }
